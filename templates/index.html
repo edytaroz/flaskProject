@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Your first page</title>
+  </head>
+  <body>
+    <main>
+      <h1>Choose your model</h1>
+      <form method="POST" action="{{url_for('choice')}}">
+          <label>
+              <select name="sel" id="sel">
+                <option value="o1">Heuristic</option>
+                <option value="o2">Simple machine learning models</option>
+                <option value="o3">Neural network</option>
+                </select>
+          </label>
+          <br>
+        <input type="submit">
+        <input type="reset">
+      </form>
+    </main>
+  </body>
+</html>
