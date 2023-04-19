@@ -9,33 +9,33 @@ import tensorflow as tf
 
 
 def preprocess():
-    data = pd.read_csv("C:\\Users\\Dell\\Downloads\\covtype.data",header=None)
+    data = pd.read_csv("C:\\Users\\Dell\\Downloads\\covtype.data", header=None)
     y = data[54]
-    X = data.drop(54,axis=1)
-    X_train, X_test, y_train, y_test = train_test_split(X,y,train_size=0.8,random_state=43)
+    X = data.drop(54, axis=1)
+    X_train, X_test, y_train, y_test = train_test_split(X, y, train_size=0.8, random_state=43)
     return X_train, X_test, y_train, y_test
 
 
 def heuristic(y_test):
-    res = np.array([random.randrange(1,7,1) for _ in range(len(y_test))])
+    res = np.array([random.randrange(1, 7, 1) for _ in range(len(y_test))])
     return res
 
 
 def knnclassifier(X_train, X_test, y_train, y_test):
     knn = KNeighborsClassifier(algorithm='kd_tree')
-    knn.fit(X_train,y_train)
+    knn.fit(X_train, y_train)
     y_pred = knn.predict(X_test)
     return y_pred
 
 
 def dtclassifier(X_train, X_test, y_train, y_test):
     dc = DecisionTreeClassifier()
-    dc.fit(X_train,y_train)
+    dc.fit(X_train, y_train)
     dcpred = dc.predict(X_test)
     return dcpred
 
 
-def nnclassifier(X_train,X_test,y_train,y_test):
+def nnclassifier(X_train, X_test, y_train, y_test):
     inputs = tf.keras.Input(shape=(54,), name="digits")
     x = tf.keras.layers.Dense(64, activation="relu", name="dense_1")(inputs)
     x = tf.keras.layers.Dense(64, activation="relu", name="dense_2")(x)
@@ -95,15 +95,15 @@ def nnclassifier(X_train,X_test,y_train,y_test):
     results1 = model1.evaluate(X_test, y_test, batch_size=128)
     results2 = model2.evaluate(X_test, y_test, batch_size=128)
     if results2[1] >= results1[1] and results2[1] >= results[1]:
-        loss = history2.history2['loss']
-        val_loss = history2.history2['val_loss']
+        loss = history2.history['loss']
+        val_loss = history2.history['val_loss']
         plt.plot(loss)
         plt.plot(val_loss)
         plt.show()
         return results2[1]
     elif results1[1] >= results2[1] and results1[1] >= results[1]:
-        loss = history1.history1['loss']
-        val_loss = history1.history1['val_loss']
+        loss = history1.history['loss']
+        val_loss = history1.history['val_loss']
         plt.plot(loss)
         plt.plot(val_loss)
         plt.show()

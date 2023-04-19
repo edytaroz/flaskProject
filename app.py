@@ -24,7 +24,7 @@ def choice():
             return "K nearest neighbors accuracy: " + str(accuracy_score(y_test,data)) + "\n" + "Decision tree accuracy: " + str(accuracy_score(y_test,data2))
         elif title == "o3":
             data = openX.nnclassifier(X_train, X_test, y_train, y_test)
-        return "Accuracy: " + str(accuracy_score(y_test,data))
+        return "Accuracy: " + str(data)
 
 
 if __name__ == '__main__':
